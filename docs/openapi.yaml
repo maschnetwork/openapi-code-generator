@@ -1,0 +1,43 @@
+openapi: "3.0.0"
+info:
+  version: "2019-07-22"
+  title: Random Endpoint Demo Docs
+
+servers:
+  - url: http://localhost:{port}/api
+    description: Local server
+    variables:
+      port:
+        enum:
+          - '8087'
+        default: '8087'
+
+paths:
+  /my-random-endpoint:
+    get:
+      operationId: get
+      summary: Gets some example data
+      tags:
+        - Random Endpoint
+      responses:
+        200:
+          description: Successfully returns something
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MyRandomObject'
+
+components:
+  schemas:
+    MyRandomObject:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier
+        name:
+          type: string
+          description: The name of the object
+        random:
+          type: string
+          enum: [something, something_different, something_else]
