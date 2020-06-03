@@ -3,7 +3,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val springVersion by extra("2.1.6.RELEASE")
 val baseKotlinDir = "src/main/kotlin"
-val openApiOutput = "$buildDir/generated/"
 
 group = "com.maschnetwork"
 
@@ -38,20 +37,10 @@ dependencies {
     testImplementation("io.rest-assured:rest-assured-all:4.0.0")
 }
 
-
-//Add generated classes to the classpath, otherwise you cannot access them
-sourceSets {
-    main {
-        withConvention(KotlinSourceSet::class) {
-            kotlin.setSrcDirs(listOf("src/main/kotlin", openApiOutput + baseKotlinDir))
-        }
-    }
-}
-
 openApiGenerate {
     generatorName.set("kotlin-spring")
     packageName.set("com.maschnetwork.generator.generated")
-    outputDir.set(openApiOutput)
+    outputDir.set("$projectDir")
     inputSpec.set("./docs/openapi.yaml")
     ignoreFileOverride.set("./docs/.openapi-generator-ignore")
     modelNameSuffix.set("DTO")
