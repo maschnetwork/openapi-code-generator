@@ -1,7 +1,7 @@
 openapi: "3.0.0"
 info:
   version: "2019-07-22"
-  title: Random Endpoint Demo Docs
+  title: Article Endpoint Demo Docs
 
 servers:
   - url: http://localhost:{port}/api
@@ -13,23 +13,25 @@ servers:
         default: '8087'
 
 paths:
-  /my-random-endpoint:
+  /articles:
     get:
       operationId: get
-      summary: Gets some example data
+      summary: Gets some articles
       tags:
-        - Random Endpoint
+        - Article
       responses:
         200:
-          description: Successfully returns something
+          description: Successfully returns Articles
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MyRandomObject'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Article'
 
 components:
   schemas:
-    MyRandomObject:
+    Article:
       type: object
       properties:
         id:
@@ -37,7 +39,9 @@ components:
           description: Unique identifier
         name:
           type: string
-          description: The name of the object
-        random:
+          description: The name of the article
+        supplier:
           type: string
-          enum: [something, something_different, something_else]
+        type:
+          type: string
+          enum: [clothes, books, media]
