@@ -1,0 +1,42 @@
+openapi: "3.0.0"
+info:
+  version: "2019-07-22"
+  title: Supplier Endpoint Demo Docs
+
+servers:
+  - url: http://localhost:{port}/api
+    description: Local server
+    variables:
+      port:
+        enum:
+          - '8087'
+        default: '8087'
+
+paths:
+  /suppliers:
+    get:
+      operationId: get
+      summary: Get all suppliers
+      tags:
+        - Suppliers
+      responses:
+        200:
+          description: Successfully returns Suppliers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Supplier'
+
+components:
+  schemas:
+    Supplier:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier
+        name:
+          type: string
+          description: The name of the supplier
