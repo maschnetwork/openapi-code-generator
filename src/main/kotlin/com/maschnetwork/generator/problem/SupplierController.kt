@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.RestController
 class SupplierController{
 
   private val suppliers = listOf(
-    Supplier(id = 1, name = "Nike"),
-    Supplier(id = 2, name = "Adidas")
+    SupplierDTO(id = 1, name = "Nike"),
+    SupplierDTO(id = 2, name = "Adidas")
   )
 
   @GetMapping("/api/suppliers")
-  fun getSuppliers() : ResponseEntity<List<Supplier>> {
+  fun getSuppliers() : ResponseEntity<List<SupplierDTO>> {
     return ResponseEntity.ok(suppliers)
   }
 }
 
-data class Supplier(val id: Long, val name: String)
+data class SupplierDTO(val id: Long, val name: String)
